@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<!-- /*******************************************************************************  -->
+<!--  * Copyright (c) 2011 Pablo Hess. All rights reserved.                            -->
+<!--  *                                                                                -->
+<!--  * This program is free software; you can redistribute it and/or modify           -->
+<!--  * it under the terms of the GNU Affero General Public License as published by    -->
+<!--  * the Free Software Foundation; either version 3 of the License, or              -->
+<!--  * (at your option) any later version.                                            -->
+<!--  *                                                                                -->
+<!--  * This program is distributed in the hope that it will be useful,                -->
+<!--  * but WITHOUT ANY WARRANTY; without even the implied warranty of                 -->
+<!--  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                   -->
+<!--  * GNU Affero General Public License for more details.                            -->
+<!--  *                                                                                -->
+<!--  * You should have received a copy of the GNU Affero General Public License       -->
+<!--  * along with this program. If not, see <http://www.gnu.org/licenses/>.           -->
+<!--  *******************************************************************************/ -->
+
+    <meta charset="utf-8">
+        
+    <title>dn.a.nalyzer</title>
+    
+    <link rel="stylesheet" href="css/themes/cupertino/jquery.ui.all.css">
+    <link rel="stylesheet" href="css/dn.a.nalyzer.css">
+ 
+    <script src="js/jquery/jquery-1.6.2.min.js"></script>
+    <script src="js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+    
+    <script src="js/jquery/external/jquery.cookie.js"></script>
+
+    <script src="js/keyDetection.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/onDocumentLoad.js"></script>
+    <script src="js/dnaAnalyzer.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+<h1>dn.a.nalyzer</h1>
+
+<div id="tabs" class="tab">
+    <ul>
+        <li><a href="#tabs-1">DNA</a></li>
+        <li><a href="#tabs-2">complementary DNA</a></li>
+        <li><a href="#tabs-3">RNA</a></li>
+        <li><a href="#tabs-4">about</a></li>
+    </ul>
+    <div id="tabs-1">
+        <div id="search" class="search">
+            <input type="text" name="searchDna" id="searchDna" class="text ui-widget-content ui-corner-all" />
+            <button id="searchDnaButton">Search</button>
+        </div>
+        <p><textarea id="dna_textarea" name="dna_textarea" cols="70" rows="15" class="text ui-widget-content ui-corner-all"></textarea></p>
+    </div>
+    <div id="tabs-2">
+        <div id="search" class="search">
+            <input type="text" name="searchDnaComp" id="searchDnaComp" class="text ui-widget-content ui-corner-all" />
+            <button id="searchDnaCompButton">Search</button>
+        </div>
+        <p><textarea id="dnaComp_textarea" name="dnaComp_textarea" cols="70" rows="15" class="text ui-widget-content ui-corner-all"></textarea></p>
+    </div>
+    <div id="tabs-3">
+        <div id="search" class="search">
+            <input type="text" name="searchRna" id="searchRna" class="text ui-widget-content ui-corner-all" />
+            <button id="searchRnaButton">Search</button>
+        </div>
+        <p><textarea id="rna_textarea" name="rna_textarea" cols="70" rows="15" class="text ui-widget-content ui-corner-all"></textarea></p>
+    </div>
+    <div id="tabs-4" style="font-family:Courier;">
+        <h3>Examples</h3>
+        CCND1 Exon 1: Chromosome 11: 69,455,805 - 69,456,329 <button id="pasteExampleCCND1">Paste Example</button><br>
+        CCND2 Exon 1: Chromosome 12: &nbsp;4,382,888 - &nbsp;4,383,451 <button id="pasteExampleCCND2">Paste Example</button>
+        
+        <br><br>
+        <h3>Informations</h3>
+        Version: 0.9.0, dn.a.nalyzer is licensed under the <a href="http://www.opensource.org/licenses/agpl-v3.html">GNU AFFERO GENERAL PUBLIC LICENSE v3</a>.
+        Get more informations about dn.a.nalyzer or give feedback:
+        <ul>
+            <li><a href="https://github.com/pablohess/dn.a.nalyzer">dn.a.nalyzer on Github</a></li>
+        </ul>
+        <br>
+        Get more informations about DNA and RNA here:
+        <ul>
+            <li><a href="http://www.ensembl.org/">Ensembl: www.ensembl.org</a></li>
+            <li><a href="http://www.ncbi.nlm.nih.gov/">NCBI: National Center for Biotechnology Information</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="dialog-form" title="Search Result">
+    <div id="dialog-content">
+        <table style="font-family:courier;">
+            <tr>
+                <td id="columnNumbers" style="text-align: right; vertical-align: top; padding-right: 10px; width: 20px;">&nbsp;</td>
+                <td id="columnContent" style="vertical-align: top;">&nbsp;</td>
+            <tr>
+        </table>
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>
