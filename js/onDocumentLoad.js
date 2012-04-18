@@ -198,6 +198,16 @@ $(function() {
                 },
                 Next: function() {
                     index = prepareSearchContentNext(getValue(TEXTAREA_DNA), getValue(INPUT_DNA), ++index);
+                },
+                Print: function() {
+                	var divs = document.getElementsByTagName('div');
+                	for (i=0; i< divs.length; i++) {
+                		if (divs[i].className.indexOf("ui-dialog ") != -1) {
+                			divs[i].style.left = "20px";
+                			break;
+                		}
+                	}
+                	window.print();
                 }
             },
             close: function() {
