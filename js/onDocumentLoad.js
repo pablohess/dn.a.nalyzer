@@ -19,6 +19,7 @@ var index = 0;
 
 $(function() {
         $(document).keydown(function(event) {
+        	console.log(event.keyCode);
             if (isCtrl(event.keyCode)) {
                 ctrlDown = true;
             }

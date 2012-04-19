@@ -24,3 +24,8 @@
 	top: 40px;
 	left: 40px;
 }
+
+span.selection {
+    font-weight: bold;
+    color: red;
+}

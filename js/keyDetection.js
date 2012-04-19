@@ -16,8 +16,10 @@
  *******************************************************************************/
 
 var KEY_CTRL = 17;
-var KEY_APPLE_LEFT = 91;
-var KEY_APPLE_RIGHT = 93;
+var KEY_APPLE_FIREFOX = 224;
+var KEY_APPLE_OPERA = 17;
+var KEY_APPLE_LEFT_WEBKIT = 91;
+var KEY_APPLE_RIGHT_WEBKIT = 93;
 var KEY_SHIFT = 16;
 var KEY_BACKSPACE = 8;
 var KEY_DELETE = 46;
@@ -49,7 +51,7 @@ function isCtrl(key) {
 }
 
 function isApple(key) {
-    return key == KEY_APPLE_LEFT || key == KEY_APPLE_RIGHT;
+    return key == KEY_APPLE_LEFT_WEBKIT || key == KEY_APPLE_RIGHT_WEBKIT || key == KEY_APPLE_FIREFOX || KEY_APPLE_OPERA;
 }
 
 function isDeleteAction(key) {
