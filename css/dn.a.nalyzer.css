@@ -15,9 +15,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
+* {
+	margin: 0px;
+	padding: 0px;
+}
 body {
     background: #ffffff url('../images/background.png') repeat-x;
     font-family: Courier;
+}
+textarea {
+	min-height: 300px;
+	min-width: 765px;
+	max-width: 765px;
+}
+li {
+	padding: 5px;
+	margin-left: 30px;
+}
+#title {
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 div.container {
             width: 992px;
