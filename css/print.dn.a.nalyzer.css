@@ -15,7 +15,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-#tabs, #title, button, .ui-dialog-titlebar {
+* {
+	font-size: 16pt;
+}
+
+#tabs, #title, button, .ui-dialog-titlebar, .ui-dialog-buttonset {
 	display: none;
 }
 
@@ -27,5 +31,9 @@
 
 span.selection {
     font-weight: bold;
-    color: red;
+    color: #3789BB;
+}
+span.selectionOverlapped {
+    font-weight: bold;
+    color: #AA00AA;
 }

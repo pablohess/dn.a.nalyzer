@@ -15,8 +15,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
+function initDialog(searchString) {
+    $("#"+SEARCHRESULT_FORM).dialog('option', 'title', 'Search Result');
+    if (searchString == "") {
+    	$(":button:contains('Mark all')").hide();
+    	$(":button:contains('Previous')").hide();
+    	$(":button:contains('Next')").hide();
+    	$(":button:contains('Mark just one')").hide();
+    }
+}
+
 function changeTitle(from, to, length) {
     $("#"+SEARCHRESULT_FORM).dialog('option', 'title', 'Search Result:&nbsp;&nbsp;&nbsp;from ' + from + ' to ' + to + ', length: ' + length);
+}
+
+function changeTitleAll(count, countOverlapping) {
+	$("#"+SEARCHRESULT_FORM).dialog('option', 'title', 'Search Result:&nbsp;&nbsp;&nbsp;' + count + ' matches, ' + countOverlapping + ' are overlapped');
 }
 
 function prepareSearchContentPrevious(textarea, input, start) {
@@ -61,6 +75,45 @@ function prepareSearchContentNext(textarea, input, start) {
     
     document.getElementById(SEARCHRESULT_NUMBERS).innerHTML = createRowNumbers(textarea.length, 50);
     return textarea.indexOf(input, start);
+}
+
+function markAll(textarea, input) {
+	var start = 0;
+	var count = 0;
+	var countOverlapping = 0;
+	if (input.length > 0 && textarea.indexOf(input, start) != -1) {
+		var parts = "";
+		while (textarea.indexOf(input, start) != -1) {
+			var index = textarea.indexOf(input, start);
+			var part1 = textarea.substring(start, index);
+			var tmp = index;
+			var last = index;
+			while (true) {
+				var current = textarea.indexOf(input, tmp + 1);
+				if (current == -1) {
+					break;
+				}
+				if (current >= last + input.length) {
+					break;
+				}
+				last = current;
+				++tmp;
+			}
+			++count;
+			countOverlapping += (tmp - index);
+			var part2 = textarea.substring(index, index + (tmp - index) + input.length);
+			if (tmp - index > 0) {
+				parts = parts + part1 + "<span class=\"selectionOverlapped\">" + part2 + "</span>";
+			} else {
+				parts = parts + part1 + "<span class=\"selection\">" + part2 + "</span>";
+			}
+			start = index + input.length + (tmp - index);
+		}
+		parts = parts + textarea.substring(start, textarea.length);
+		document.getElementById(SEARCHRESULT_CONTENT).innerHTML = formatContent(parts, 5, 10, 50);
+		
+		changeTitleAll(count + countOverlapping, countOverlapping);
+	}
 }
 
 function inverseAT(at) {
@@ -112,7 +165,7 @@ function formatContent(str, space, block, newLine) {
                 }
             }
             
-            if (array[index] == "<") {
+            while (array[index] == "<") {
                 htmlTag = true;
                 for (;array[index] != ">";++index) {
                     ret += array[index];
@@ -121,7 +174,7 @@ function formatContent(str, space, block, newLine) {
                 ++index;
             }
         } else {
-            if (array[index] == "<") {
+            while (array[index] == "<") {
                 htmlTag = false;
                 for (;array[index] != ">";++index) {
                     ret += array[index];

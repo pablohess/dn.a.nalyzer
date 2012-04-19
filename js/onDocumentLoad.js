@@ -19,7 +19,6 @@ var index = 0;
 
 $(function() {
         $(document).keydown(function(event) {
-        	console.log(event.keyCode);
             if (isCtrl(event.keyCode)) {
                 ctrlDown = true;
             }
@@ -166,14 +165,17 @@ $(function() {
         $("#"+BUTTON_SEARCH_DNA).click(function() {
             index = prepareSearchContentNext(getValue(TEXTAREA_DNA), getValue(INPUT_DNA), 0);
             $("#"+SEARCHRESULT_FORM).dialog("open");
+            initDialog(getValue(INPUT_DNA));
         });
         $("#"+BUTTON_SEARCH_DNA_COMP).click(function() {
             index = prepareSearchContentNext(getValue(TEXTAREA_DNA_COMP), getValue(INPUT_DNA_COMP), 0);
             $("#"+SEARCHRESULT_FORM).dialog("open");
+            initDialog(getValue(INPUT_DNA_COMP));
         });
         $("#"+BUTTON_SEARCH_RNA).click(function() {
             index = prepareSearchContentNext(getValue(TEXTAREA_RNA), getValue(INPUT_RNA), 0);
             $("#"+SEARCHRESULT_FORM).dialog("open");
+            initDialog(getValue(INPUT_RNA));
         });
         $("#"+BUTTON_CCND1).click(function() {
             pasteExample(CCND1Chromosome11);
@@ -188,16 +190,31 @@ $(function() {
             width: 840,
             modal: true,
             open: function() {
-                $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button:eq(2)').focus(); 
+                $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button:eq(2)').focus();
+                $(":button:contains('Mark all')").show();
+                $(":button:contains('Previous')").show();
+                $(":button:contains('Next')").show();
+                $(":button:contains('Mark just one')").hide();
             },
             buttons: {
-                Cancel: function() {
-                    $(this).dialog("close");
+                'Mark all': function() {
+                	$(":button:contains('Mark all')").hide();
+                	$(":button:contains('Previous')").hide();
+                	$(":button:contains('Next')").hide();
+                	$(":button:contains('Mark just one')").show();
+                	markAll(getValue(TEXTAREA_DNA), getValue(INPUT_DNA));
                 },
-                Previous: function() {
+                'Mark just one': function() {
+                	$(":button:contains('Mark just one')").hide();
+                	$(":button:contains('Mark all')").show();
+                	$(":button:contains('Previous')").show();
+                	$(":button:contains('Next')").show();
+                	index = prepareSearchContentNext(getValue(TEXTAREA_DNA), getValue(INPUT_DNA), index);
+                },
+                'Previous': function() {
                     index = prepareSearchContentPrevious(getValue(TEXTAREA_DNA), getValue(INPUT_DNA), ++index);
                 },
-                Next: function() {
+                'Next': function() {
                     index = prepareSearchContentNext(getValue(TEXTAREA_DNA), getValue(INPUT_DNA), ++index);
                 },
                 Print: function() {
@@ -209,10 +226,10 @@ $(function() {
                 		}
                 	}
                 	window.print();
+                },
+                Cancel: function() {
+                    $(this).dialog("close");
                 }
-            },
-            close: function() {
-                allFields.val("").removeClass("ui-state-error");
             }
         });
 });
